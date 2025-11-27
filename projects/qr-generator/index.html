@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador QR Premium</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=gen-lang-client-0392773928"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'gen-lang-client-0392773928');
+    </script>
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fa-solid fa-qrcode"></i>
+                <span>QR Gen</span>
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-type="website">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>Sitio Web</span>
+                </button>
+                <button class="nav-item" data-type="instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                    <span>Instagram</span>
+                </button>
+                <button class="nav-item" data-type="facebook">
+                    <i class="fa-brands fa-facebook-f"></i>
+                    <span>Facebook</span>
+                </button>
+                <button class="nav-item" data-type="whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </button>
+                <button class="nav-item" data-type="phone">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    <span>Celular</span>
+                </button>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <div class="generator-card">
+                <div class="header">
+                    <h1 id="form-title">Generar QR para Sitio Web</h1>
+                    <p>Crea un código QR único y personalizado en segundos.</p>
+                </div>
+
+                <div class="input-section" id="input-container">
+                    <!-- Los inputs se generan dinámicamente aquí -->
+                </div>
+
+                <div class="action-buttons">
+                    <button id="generate-btn" class="btn-primary">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Generar QR
+                    </button>
+                </div>
+            </div>
+
+            <div class="preview-card">
+                <div class="qr-placeholder" id="qr-placeholder">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <p>Tu código QR aparecerá aquí</p>
+                </div>
+
+                <div class="qr-result-container" id="qr-result-container" style="display: none;">
+                    <div class="qr-output" id="qr-output"></div>
+
+                    <div class="download-actions">
+                        <button id="download-btn" class="btn-secondary" title="Descargar imagen PNG">
+                            <i class="fa-solid fa-download"></i> PNG
+                        </button>
+                        <button id="pdf-btn" class="btn-secondary" title="Guardar como PDF">
+                            <i class="fa-solid fa-file-pdf"></i> PDF
+                        </button>
+                        <button id="print-btn" class="btn-secondary" title="Imprimir QR">
+                            <i class="fa-solid fa-print"></i> Imprimir
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

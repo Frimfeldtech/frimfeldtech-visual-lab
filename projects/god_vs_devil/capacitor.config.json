@@ -1,0 +1,15 @@
+{
+    "appId": "com.fabrizioraimondi.godvsdevil",
+    "appName": "GodVsDevil",
+    "webDir": ".",
+    "bundledWebRuntime": false,
+    "server": {
+        "androidScheme": "https"
+    },
+    "android": {
+        "buildOptions": {
+            "keystorePath": "release-key.keystore",
+            "keystoreAlias": "godvsdevil-key"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+Listado de rutas de carpetas para el volumen Disco D
+El n£mero de serie del volumen es 4088-F24E
+E:\PROYECTOS DE APPS WEBS Y JUEGOS\GOD_VS_DEVIL\UNITY_GODVSDEVIL
+³   ART_DIRECTION_GUIDE.md
+³   INPUT_SYSTEM_CONFIG.md
+³   PROJECT_SUMMARY.md
+³   README.md
+³   STRUCTURE.txt
+³   
+ÃÄÄÄAnimations
+ÃÄÄÄAudio
+ÃÄÄÄPrefabs
+ÃÄÄÄScenes
+ÀÄÄÄScripts
+    ÃÄÄÄAI
+    ³       BossAI.cs
+    ³       
+    ÃÄÄÄCombat
+    ³       FighterController.cs
+    ³       
+    ÃÄÄÄSystems
+    ³       CharacterDatabase.cs
+    ³       CharacterProgression.cs
+    ³       GameManager.cs
+    ³       MissionSystem.cs
+    ³       
+    ÀÄÄÄUI
+            GameUIManager.cs
+            

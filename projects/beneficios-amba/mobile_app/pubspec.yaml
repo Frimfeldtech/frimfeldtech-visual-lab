@@ -1,0 +1,23 @@
+name: beneficios_amba_app
+description: App móvil para Beneficios AMBA.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_map: ^7.0.0
+  latlong2: ^0.9.1
+  http: ^1.2.0
+  image_picker: ^1.0.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

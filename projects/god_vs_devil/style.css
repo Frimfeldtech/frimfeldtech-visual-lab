@@ -1,0 +1,558 @@
+:root {
+    --angel-color: #ffd700;
+    --demon-color: #ff0000;
+    --bg-dark: #050505;
+    --text-glow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+body {
+    background: url('assets/title_bg_eternal_war.png') no-repeat center center fixed, linear-gradient(90deg, #0a0a2a 0%, #000 50%, #2a0a0a 100%);
+    background-size: cover;
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1280px;
+    max-height: 720px;
+    background: #111;
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* UI Layer */
+#ui-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.menu-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.menu-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.game-title {
+    font-size: 5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    background: linear-gradient(to right, #fff, #ffd700, #ff0000, #500000);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: titlePulse 3s infinite;
+}
+
+.game-title .vs {
+    font-size: 3rem;
+    color: #fff;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.subtitle {
+    font-size: 2rem;
+    color: #ff4500;
+    letter-spacing: 10px;
+    display: block;
+    margin-top: -10px;
+}
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.menu-btn {
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    padding: 1rem 3rem;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    position: relative;
+    overflow: hidden;
+}
+
+.small-btn {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+}
+
+.menu-btn:hover,
+.menu-btn.selected {
+    border-color: var(--angel-color);
+    background: rgba(255, 215, 0, 0.1);
+    text-shadow: 0 0 10px var(--angel-color);
+    transform: scale(1.05);
+}
+
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.menu-btn:hover::before {
+    left: 100%;
+}
+
+/* Character Select */
+.sides-container {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    margin-bottom: 2rem;
+}
+
+.side {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+.side.angels {
+    border-color: var(--angel-color);
+}
+
+.side.demons {
+    border-color: var(--demon-color);
+}
+
+.side h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.char-slot {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #555;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    text-align: center;
+    transition: all 0.2s;
+    background: #222;
+    background-size: cover;
+    background-position: center;
+}
+
+.char-slot:hover,
+.char-slot.active {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+#char-preview {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: breathe 3s infinite ease-in-out;
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 0 2rem;
+    color: #888;
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+}
+
+.health-bar {
+    width: 40%;
+    height: 30px;
+    background: #333;
+    border: 2px solid #555;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ff5500);
+    width: 100%;
+    transition: width 0.2s;
+}
+
+.p1 .bar-fill {
+    background: linear-gradient(90deg, #00ff00, #ffff00);
+}
+
+.p2 .bar-fill {
+    background: linear-gradient(90deg, #ff0000, #880000);
+}
+
+.name {
+    position: absolute;
+    top: 35px;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.p1 .name {
+    left: 0;
+}
+
+.p2 .name {
+    right: 0;
+}
+
+.timer {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+}
+
+/* Scanlines */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.3;
+}
+
+@keyframes titlePulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    50% {
+        transform: scale(1.02);
+        text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    }
+
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Credits */
+#credits-screen h1 {
+    color: #ffd700;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+#credits-screen h2 {
+    color: #aaa;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+#credits-screen h3 {
+    color: #fff;
+    width: 90%;
+    margin-bottom: 2rem;
+}
+
+.side {
+    flex: 1;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid #333;
+}
+
+.side.angels {
+    border-color: var(--angel-color);
+}
+
+.side.demons {
+    border-color: var(--demon-color);
+}
+
+.side h3 {
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.char-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+}
+
+.char-slot {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #555;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    text-align: center;
+    transition: all 0.2s;
+    background: #222;
+    background-size: cover;
+    background-position: center;
+}
+
+.char-slot:hover,
+.char-slot.active {
+    border-color: #fff;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+#char-preview {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1rem;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    animation: breathe 3s infinite ease-in-out;
+}
+
+@keyframes breathe {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.vs-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    padding: 0 2rem;
+    color: #888;
+}
+
+/* HUD */
+#hud {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    pointer-events: none;
+}
+
+.health-bar {
+    width: 40%;
+    height: 30px;
+    background: #333;
+    border: 2px solid #555;
+    position: relative;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ff0000, #ff5500);
+    width: 100%;
+    transition: width 0.2s;
+}
+
+.p1 .bar-fill {
+    background: linear-gradient(90deg, #00ff00, #ffff00);
+}
+
+.p2 .bar-fill {
+    background: linear-gradient(90deg, #ff0000, #880000);
+}
+
+.name {
+    position: absolute;
+    top: 35px;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 0 #000;
+}
+
+.p1 .name {
+    left: 0;
+}
+
+.p2 .name {
+    right: 0;
+}
+
+.timer {
+    font-size: 3rem;
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+}
+
+/* Scanlines */
+.scanlines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0.2));
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.3;
+}
+
+@keyframes titlePulse {
+    0% {
+        transform: scale(1);
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+
+    50% {
+        transform: scale(1.02);
+        text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    }
+
+    100% {
+        transform: scale(1);
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    }
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Credits */
+#credits-screen h1 {
+    color: #ffd700;
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+#credits-screen h2 {
+    color: #aaa;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+}
+
+#credits-screen h3 {
+    color: #fff;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    text-shadow: 0 0 10px #fff;
+}
+
+#credits-screen p {
+    margin-bottom: 2rem;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}

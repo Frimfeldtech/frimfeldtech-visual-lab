@@ -1,0 +1,25 @@
+{
+  "name": "god-vs-devil",
+  "version": "1.0.0",
+  "description": "God vs Devil - Eternal War Fighting Game",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "package-win": "electron-packager . GodVsDevil --platform=win32 --arch=x64 --out=dist --overwrite --icon=assets/icon.ico",
+    "package-linux": "electron-packager . GodVsDevil --platform=linux --arch=x64 --out=dist --overwrite",
+    "cap-init": "npx cap init GodVsDevil com.fabrizioraimondi.godvsdevil --web-dir=.",
+    "cap-android": "npx cap add android && npx cap sync",
+    "cap-open-android": "npx cap open android"
+  },
+  "author": "Fabrizio Raimondi Imfeld",
+  "license": "PROPRIETARY",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-packager": "^17.1.2"
+  },
+  "dependencies": {
+    "@capacitor/android": "^5.5.0",
+    "@capacitor/cli": "^5.5.0",
+    "@capacitor/core": "^5.5.0"
+  }
+}

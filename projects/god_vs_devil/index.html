@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GOD VS DEVIL - ETERNAL WAR</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Roboto+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="game-container">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- UI Layer -->
+        <div id="ui-layer">
+            <!-- Main Menu -->
+            <div id="main-menu" class="menu-screen active">
+                <h1 class="game-title">GOD <span class="vs">VS</span> DEVIL<br><span class="subtitle">ETERNAL WAR</span>
+                </h1>
+                <div class="menu-options">
+                    <button class="menu-btn" data-action="story">MODO HISTORIA</button>
+                    <button class="menu-btn" data-action="arcade">ARCADE</button>
+                    <button class="menu-btn" data-action="versus">VERSUS</button>
+                    <button class="menu-btn" data-action="survival">SOBREVIVENCIA (60s)</button>
+                    <button class="menu-btn" data-action="infinite">SURVIVAL INFINITO</button>
+                    <button class="menu-btn" data-action="options">OPCIONES</button>
+                </div>
+                <div class="controls-hint">
+                    <p>Usa <span class="key">↑</span> <span class="key">↓</span> para moverte, <span
+                            class="key">ENTER</span> para seleccionar</p>
+                </div>
+            </div>
+
+            <!-- Character Select -->
+            <div id="char-select" class="menu-screen hidden">
+                <h2>ELIGE TU DESTINO</h2>
+                <div class="sides-container">
+                    <div class="side angels">
+                        <h3>ARCÁNGELES</h3>
+                        <div class="char-grid" id="angel-grid"></div>
+                    </div>
+                    <div class="vs-divider">VS</div>
+                    <div class="side demons">
+                        <h3>DEMONIOS</h3>
+                        <div class="char-grid" id="demon-grid"></div>
+                    </div>
+                </div>
+                <div id="selected-char-info">
+                    <div id="char-preview"></div>
+                    <h3 id="char-name">Selecciona un personaje</h3>
+                    <p id="char-desc">...</p>
+                </div>
+                <button class="menu-btn small-btn mt-20" data-action="back">VOLVER</button>
+            </div>
+
+            <!-- HUD -->
+            <div id="hud" class="hidden">
+                <div class="health-bar p1">
+                    <div class="bar-fill" id="p1-health"></div>
+                    <div class="name" id="p1-name">PLAYER 1</div>
+                </div>
+                <div class="timer" id="timer">99</div>
+                <div class="health-bar p2">
+                    <div class="bar-fill" id="p2-health"></div>
+                    <div class="name" id="p2-name">PLAYER 2</div>
+                </div>
+            </div>
+
+            <!-- Game Over / Pause -->
+            <div id="pause-menu" class="menu-screen hidden">
+                <h2>PAUSA</h2>
+                <button class="menu-btn" data-action="resume">CONTINUAR</button>
+                <button class="menu-btn" data-action="quit">SALIR AL MENÚ</button>
+            </div>
+        </div>
+
+        <!-- Scanlines Effect -->
+        <div class="scanlines"></div>
+    </div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+
+</html>
